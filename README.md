@@ -48,7 +48,7 @@ You need a C compiler like **GCC**.
   2. Add `C:\MinGW\bin` to your system PATH.  
 
 - **macOS:**  
-  ```bash
+```bash
   brew install gcc
 ```
 
