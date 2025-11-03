@@ -50,3 +50,8 @@ You need a C compiler like **GCC**.
 - **macOS:**  
   ```bash
   brew install gcc
+
+```bash
+gcc inventory.c -o inventory
+
+
