@@ -55,7 +55,7 @@ You need a C compiler like **GCC**.
 Clone the GitHub repository and enter the project folder:.  
 
 ```bash
-  [git clone https://github.com/yourusername/inventory-management-c.git](https://github.com/rahat9016/Inventory-Management-System.git)
+  git clone https://github.com/yourusername/inventory-management-c.git
   cd Inventory-Management-System
 ```
 
