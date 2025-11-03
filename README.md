@@ -51,7 +51,17 @@ You need a C compiler like **GCC**.
   ```bash
   brew install gcc
 
-```bash
-gcc inventory.c -o inventory
+### **Step 2 : Download the Project**
+Clone the GitHub repository and enter the project folder:.  
 
+```bash
+  [git clone https://github.com/yourusername/inventory-management-c.git](https://github.com/rahat9016/Inventory-Management-System.git)
+  cd Inventory-Management-System
+```
+
+### **Step 3: Compile the Program**
+Use GCC to compile the C file:
+```bash
+   gcc inventory.c -o inventory
+```
 
