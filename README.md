@@ -49,19 +49,20 @@ You need a C compiler like **GCC**.
 
 - **macOS:**  
   ```bash
-  brew install gcc
+brew install gcc
+```
 
 ### **Step 2 : Download the Project**
 Clone the GitHub repository and enter the project folder:.  
 
 ```bash
-  git clone https://github.com/yourusername/inventory-management-c.git
-  cd Inventory-Management-System
+git clone https://github.com/rahat9016/Inventory-Management-System.git
+cd Inventory-Management-System
 ```
 
 ### **Step 3: Compile the Program**
 Use GCC to compile the C file:
 ```bash
-   gcc inventory.c -o inventory
+gcc inventory.c -o inventory
 ```
 
