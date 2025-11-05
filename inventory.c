@@ -16,28 +16,31 @@ struct Product
 struct Product products[100];
 int count = 0;
 
-
 void load_from_file();
 void save_to_file();
 void add_product();
 void update_product();
 void view_products();
-int input_positive_int(const char* prompt);
-float input_positive_float(const char* prompt);
+int input_positive_int(const char *prompt);
+float input_positive_float(const char *prompt);
 
 // <<<< ====== Load data from the inventory.dat ====== >>>>
-void load_from_file() {
+void load_from_file()
+{
     FILE *fp = fopen(FILE_NAME, "rb");
-    if (fp != NULL) {
+    if (fp != NULL)
+    {
         fread(&count, sizeof(int), 1, fp);
         fread(products, sizeof(struct Product), count, fp);
         fclose(fp);
     }
 }
 
-void save_to_file() {
+void save_to_file()
+{
     FILE *fp = fopen(FILE_NAME, "wb");
-    if (fp != NULL) {
+    if (fp != NULL)
+    {
         fwrite(&count, sizeof(int), 1, fp);
         fwrite(products, sizeof(struct Product), count, fp);
         fclose(fp);
@@ -47,36 +50,45 @@ void save_to_file() {
 int input_positive_int(const char *prompt)
 {
     int num;
-    do
+
+    printf("%s", prompt);
+    scanf("%d", &num);
+
+    while (num < 0)
     {
+        printf("❌ Cannot be negative. Try again.\n");
         printf("%s", prompt);
         scanf("%d", &num);
-        if (num < 0)
-            printf("❌ Cannot be negative. Try again.\n");
-    } while (num < 0);
+    }
+
     return num;
 }
+
 
 float input_positive_float(const char *prompt)
 {
     float num;
-    do
+
+    printf("%s", prompt);
+    scanf("%f", &num);
+
+    while (num < 0)
     {
+        printf("❌ Cannot be negative. Try again.\n");
         printf("%s", prompt);
         scanf("%f", &num);
-        if (num < 0)
-            printf("❌ Cannot be negative. Try again.\n");
-    } while (num < 0);
+    }
+
     return num;
 }
 
-
-void add_product() {
+void add_product()
+{
     struct Product p;
 
-    p.id = (count == 0) ? 1 : products[count-1].id + 1;
+    p.id = (count == 0) ? 1 : products[count - 1].id + 1;
 
-    getchar(); // clear newline
+    getchar();
     printf("\nEnter Product Name: ");
     fgets(p.name, sizeof(p.name), stdin);
     p.name[strcspn(p.name, "\n")] = '\0';
@@ -95,17 +107,23 @@ void add_product() {
         printf(" ❌ ALERT: Product is OUT OF STOCK!\n");
 }
 
-void update_product() {
+void update_product()
+{
     int id, found = 0;
     id = input_positive_int("\nEnter Product ID to update: ");
 
-    for (int i = 0; i < count; i++) {
-        if (products[i].id == id) {
+    for (int i = 0; i < count; i++)
+    {
+        if (products[i].id == id)
+        {
             products[i].quantity = input_positive_int("Enter new quantity: ");
 
-            if (products[i].quantity > 0) {
+            if (products[i].quantity > 0)
+            {
                 products[i].price = input_positive_float("Enter new price: ");
-            } else {
+            }
+            else
+            {
                 printf("⚠️ Quantity is 0, price not updated.\n");
             }
 
@@ -122,16 +140,19 @@ void update_product() {
             break;
         }
     }
-    if (!found) printf("❌ Product not found.\n");
+    if (!found)
+        printf("❌ Product not found.\n");
 }
 
-
-void delete_product() {
+void delete_product()
+{
     int id, found = 0;
     id = input_positive_int("\nEnter Product ID to delete: ");
 
-    for (int i = 0; i < count; i++) {
-        if (products[i].id == id) {
+    for (int i = 0; i < count; i++)
+    {
+        if (products[i].id == id)
+        {
             for (int j = i; j < count - 1; j++)
                 products[j] = products[j + 1];
             count--;
@@ -141,22 +162,25 @@ void delete_product() {
             break;
         }
     }
-    if (!found) printf("❌ Product not found.\n");
+    if (!found)
+        printf("❌ Product not found.\n");
 }
 
-
-void view_products() {
-    if (count == 0) {
+void view_products()
+{
+    if (count == 0)
+    {
         printf("\n⚠️ No products found.\n");
         return;
     }
 
     printf("\n================ INVENTORY LIST ================\n");
-    printf("| %-4s | %-25s | %-7s | %-10s | %-12s | %-10s |\n", 
+    printf("| %-4s | %-25s | %-7s | %-10s | %-12s | %-10s |\n",
            "ID", "Name", "Qty", "Price", "Status", "Available");
     printf("-----------------------------------------------------------------------------\n");
 
-    for (int i = 0; i < count; i++) {
+    for (int i = 0; i < count; i++)
+    {
         char status[20] = "";
         char available[10] = "";
 
@@ -181,14 +205,13 @@ void view_products() {
     printf("-----------------------------------------------------------------------------\n");
 }
 
-
-
 int main()
 {
     int choice;
     load_from_file();
 
-    while (1) {
+    while (1)
+    {
         printf("\n========== INVENTORY MANAGEMENT ==========\n");
         printf("1. Add Product\n");
         printf("2. View Products\n");
@@ -198,16 +221,26 @@ int main()
         printf("Enter your choice: ");
         scanf("%d", &choice);
 
-        switch(choice) {
-            case 1: add_product(); break;
-            case 2: view_products(); break;
-            case 3: update_product(); break;
-            case 4: delete_product(); break;
-            case 5:
-                save_to_file();
-                printf("\n💾 Data saved. Exiting program...\n");
-                exit(0);
-            default: printf("❌ Invalid choice. Try again.\n");
+        switch (choice)
+        {
+        case 1:
+            add_product();
+            break;
+        case 2:
+            view_products();
+            break;
+        case 3:
+            update_product();
+            break;
+        case 4:
+            delete_product();
+            break;
+        case 5:
+            save_to_file();
+            printf("\n💾 Data saved. Exiting program...\n");
+            exit(0);
+        default:
+            printf("❌ Invalid choice. Try again.\n");
         }
     }
 
